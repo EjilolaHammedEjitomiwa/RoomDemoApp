@@ -8,7 +8,7 @@ import com.geodeveloper.roomdemoapp.database.Subscriber
 import com.geodeveloper.roomdemoapp.databinding.ListItemBinding
 import kotlinx.android.synthetic.main.activity_main.view.*
 
-class RecyclerViewAdapter(private val subscriber: List<Subscriber>):RecyclerView.Adapter<MyViewHolder> {
+class RecyclerViewAdapter(private val subscriber: List<Subscriber>):RecyclerView.Adapter<MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

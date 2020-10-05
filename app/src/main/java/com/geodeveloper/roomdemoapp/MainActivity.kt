@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.geodeveloper.roomdemoapp.database.SubscriberDatabase
 import com.geodeveloper.roomdemoapp.database.SubscriberRepository
 import com.geodeveloper.roomdemoapp.databinding.ActivityMainBinding
@@ -23,13 +24,19 @@ class MainActivity : AppCompatActivity() {
         subscriberViewModel = ViewModelProvider(this,factory).get(SubscriberViewModel::class.java)
         binding.myViewModel = subscriberViewModel
         binding.lifecycleOwner = this
-        displaySubscriberList()
+       initRecyclerView()
 
     }
 
     private fun displaySubscriberList(){
         subscriberViewModel.subscriber.observe(this, Observer {
             Log.i("MYTAG",it.toString())
+            binding.subscriberRecyclerView.adapter = RecyclerViewAdapter(it)
         })
+    }
+
+    private fun initRecyclerView(){
+        binding.subscriberRecyclerView.layoutManager = LinearLayoutManager(this)
+        displaySubscriberList()
     }
 }
