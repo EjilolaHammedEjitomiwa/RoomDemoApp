@@ -1,6 +1,7 @@
 package com.geodeveloper.roomdemoapp
 
 import androidx.databinding.Bindable
+import androidx.databinding.Observable
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,7 +9,7 @@ import com.geodeveloper.roomdemoapp.database.Subscriber
 import com.geodeveloper.roomdemoapp.database.SubscriberRepository
 import kotlinx.coroutines.launch
 
-class SubscriberViewModel(private val repository: SubscriberRepository) :ViewModel(){
+class SubscriberViewModel(private val repository: SubscriberRepository) : ViewModel(),Observable {
     val subscriber = repository.subscribers
     @Bindable
     val inputName = MutableLiveData<String>()
@@ -54,5 +55,13 @@ class SubscriberViewModel(private val repository: SubscriberRepository) :ViewMod
         viewModelScope.launch {
             repository.deleteAll()
         }
+    }
+
+    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
+
+    }
+
+    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {
+
     }
 }
